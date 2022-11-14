@@ -1,0 +1,90 @@
+class Registro:
+  def __init__(self):
+    self.Nombre=[]
+    self.contraseñas=[]
+    self.dinero=[]
+    self.cuentas_ahorros=[]
+
+  def user(self):
+    self.Nombre.append(input("Digite su nombre "))
+    self.contraseñas.append(input("Digite una contraseña "))
+    self.dinero.append(0)
+    self.cuentas_ahorros.append(0)
+    print("Su codigo es 0 ")
+    Iniciar.Entrada()
+
+class Nequi(Registro):
+  def __init__(self):
+    super().__init__()
+
+  def Entrada(self):
+    self.codigo=int(input("Digite  su codigo "))
+    nombre=input("Digite su nombre ")
+    contraseñas=input("Digite su contraseña ")
+    if nombre==self.Nombre[self.codigo] and contraseñas==self.contraseñas[self.codigo]:
+       Iniciar.inicio()
+    else:
+      print("Nombre o contraseña incorrecta")
+
+  def inicio(self):
+    print("Binevenido",self.Nombre[self.codigo])
+    print("su saldo es  ", self.dinero[self.codigo])
+    print("Su ahorro es  ",self.cuentas_ahorros[self.codigo])
+    print("1.Retirar fondos")
+    print("2.Ingresar Fondos")
+    print("3.COlchones")
+    print("4.Crear Una nueva cuenta")
+    print("5.Exit")
+    print("Su ahorro es de: $",self.cuentas_ahorros[self.codigo])
+    self.opcion=input("Digite una opcion: ")
+    if self.opcion=="1":
+      Iniciar.Retirar()
+      Iniciar.inicio()
+    elif self.opcion=="2":
+      Iniciar.Ingresar()
+      Iniciar.inicio()
+    elif  self.opcion=="3":
+      Iniciar.Ahorro()
+      Iniciar.inicio()
+    elif  self.opcion=="4":
+      Iniciar.Nueva()
+    elif self.opcion=="5":
+      Iniciar.Entrada()
+
+  def Ingresar(self):
+    entra=int(input("Digite cantidad: "))
+    entra=self.dinero[self.codigo]+entra
+    self.dinero.pop(self.codigo)
+    self.dinero.insert(self.codigo,entra)
+
+  def Retirar(self):
+    sale=int(input("Digite cantidad: "))
+    if  self.dinero[self.codigo]>=sale:
+      sale=self.dinero[self.codigo]-sale
+      self.dinero.pop(self.codigo)
+      self.dinero.insert(self.codigo,sale)
+    else:
+      print("Error en transaccion")
+
+  def Nueva(self):
+    self.Nombre.append(input("Digite su nombre "))
+    self.contraseñas.append(input("Digite una contraseña "))
+    self.dinero.append(0)
+    self.cuentas_ahorros.append(0)
+    print("Su codigo es  1")
+    Iniciar.Entrada()
+
+  def Ahorro(self):
+    dinero_cuentas_ahorros=int(input("Digite cantidad: "))
+    if  self.dinero[self.codigo]>=dinero_cuentas_ahorros:
+      ahorros_entra=self.cuentas_ahorros[self.codigo]+dinero_cuentas_ahorros
+      self.cuentas_ahorros.pop(self.codigo)
+      self.cuentas_ahorros.insert(self.codigo,ahorros_entra)
+      ahorros_sale=self.dinero[self.codigo]-dinero_cuentas_ahorros
+      self.dinero.pop(self.codigo)
+      self.dinero.insert(self.codigo,ahorros_sale)
+    else:
+      print("Error en transaccion")
+
+Iniciar=Nequi()
+Iniciar.user()
